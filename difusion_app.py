@@ -447,3 +447,9 @@ def main():
             m2 = c2.number_input("μ2 [cP] a T2", value=mu_agua(T), format="%.4f")
             st.success(f"D(T2) = {liq_escalar(D1, T1, m1, T2, m2):.4e} cm²/s")
             st.info("En líquidos el efecto de P es despreciable a presiones moderadas.")
+if __name__ == "__main__":
+    if "--test" in sys.argv:
+        for d, c, r, e, s in correr_validacion():
+            print(f"{d:55s} calc={c:.4e} ref={r:.4e} err={e:+.1f}%  {s}")
+    else:
+        main()
