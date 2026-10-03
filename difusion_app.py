@@ -235,7 +235,9 @@ def liq_escalar(D1, T1, mu1, T2, mu2):
 # ───────────────────────── INTERFAZ STREAMLIT ─────────────────────────
 def main():
     import streamlit as st
-         st.title("Prueba de conexión exitosa").    
+
+    st.title("Prueba de conexión exitosa")
+
     st.set_page_config(page_title="Difusión molar", layout="wide")
     st.title("Estimación de coeficientes de difusión molar")
 
