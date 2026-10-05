@@ -435,7 +435,7 @@ def main():
             met = st.radio("Dependencia con T", ["T^1.75 (tipo FSG)", "T^1.5·Ω(T1)/Ω(T2) (Chapman–Enskog)"])
             eps = None
             if "Ω" in met:
-                nm = list(GAS); a1 = st.selectbox("A", nm, nm.index("CO2"), key="ea")
+                nm = list(GAS); a1 = st.selectbox("A", nm, nm.index("Dioxido de carbono"), key="ea")
                 b1 = st.selectbox("B", nm, nm.index("Aire"), key="eb")
                 eps = _lj(GAS[a1], GAS[b1])[1]
             st.success(f"D(T2,P2) = {gas_escalar(D1, T1, P1, T2, P2, eps):.4e} cm²/s")
