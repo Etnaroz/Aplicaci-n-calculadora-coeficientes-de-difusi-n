@@ -184,10 +184,6 @@ def liq_wilke_chang(VA, MB, phi, T, muB):
     """Wilke-Chang. VA [cm³/mol a Tb], muB [cP]. -> cm²/s"""
     return 7.4e-8 * math.sqrt(phi * MB) * T / (muB * VA ** 0.6)
 
-def liq_hayduk_minhas_tension(VB, VA, T, muB, sigB):
-    """H-M con tensión superficial. B = solvente, A = soluto. -> cm²/s"""
-    return 1.55e-8 * VB**0.217 * T**1.29 * sigB**0.125 / (muB**0.92 * VA**0.45)
-
 def liq_hayduk_minhas_acuoso(VA, T, muB):
     """Hayduk-Minhas, soluto en agua. -> cm²/s"""
     eps = 9.58 / VA - 1.12
