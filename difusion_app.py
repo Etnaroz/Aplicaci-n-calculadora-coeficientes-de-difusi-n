@@ -7,6 +7,7 @@ UNITS = {"m²/s": 1.0, "cm²/s": 1e4, "mm²/s": 1e6,
 P_ATM = {"atm": 1.0, "bar": 0.986923, "kPa": 0.00986923, "psi": 0.0680460, "mmHg": 1 / 760}
 
 # ───────────────────────── BASE DE DATOS ─────────────────────────
+# M [g/mol], sig [Å], eps [K] (eps/k), mu [debye], Tb [K], Vb [cm³/mol, Le Bas], vf (vol. difusión FSG)
 GAS = {
     "Acetileno":dict(M=26.04,  sig=3.281, eps=444.0,  mu=0.0,  Tb=189.3,  Vb=40.7, vf=24.0),
     "Aire":     dict(M=28.97,  sig=3.711, eps=78.6,   mu=0.0,  Tb=78.7,   Vb=29.9, vf=20.1),
@@ -39,7 +40,7 @@ GAS = {
     "Dioxido de azufre":      dict(M=64.06,  sig=4.112, eps=335.4,  mu=1.63, Tb=263.1,  Vb=44.8, vf=41.1),
     "Sulfuro de hidrogeno":      dict(M=34.08,  sig=3.623, eps=301.1,  mu=0.97, Tb=212.8,  Vb=32.9, vf=21.0),
     "Metanol":  dict(M=32.04,  sig=3.626, eps=481.8,  mu=1.70, Tb=337.8,  Vb=42.5, vf=29.9),
-    "Cloruro de hidrogeno":  dict(M=36.46,  sig=3.282, eps=205.0,  mu=0.0138,  Tb=188.2,  Vb=22.4, vf=15.0),
+    "Cloruro de hidrogeno":  dict(M=36.46,  sig=3.282, eps=205.0,  mu=1.09,  Tb=188.2,  Vb=22.4, vf=15.0),
     "Acetona":  dict(M=58.08,  sig=4.600, eps=560.2,  mu=2.88, Tb=329.4,  Vb=77.5, vf=67.7),
 }
 #                    [g/mol],     [K],  [cm³/mol,Tb], phi (asociación), mu [cP a 25 °C], rho [g/cm³], sigma [dina/cm], par = paracoro
