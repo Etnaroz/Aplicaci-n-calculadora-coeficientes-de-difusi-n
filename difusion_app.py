@@ -184,17 +184,18 @@ def liq_wilke_chang(VA, MB, phi, T, muB):
     """Wilke-Chang. VA [cm³/mol a Tb], muB [cP]. -> cm²/s"""
     return 7.4e-8 * math.sqrt(phi * MB) * T / (muB * VA ** 0.6)
 
+def liq_hayduk_minhas_tension(VB, VA, T, muB, sigB):
+    """H-M con tensión superficial. B = solvente, A = soluto. -> cm²/s"""
+    return 1.55e-8 * VB*0.217 * T1.29 * sigB0.125 / (muB0.92 * VA*0.45)
 
 def liq_hayduk_minhas_acuoso(VA, T, muB):
     """Hayduk-Minhas, soluto en agua. -> cm²/s"""
     eps = 9.58 / VA - 1.12
     return 1.25e-8 * (VA ** -0.19 - 0.292) * T ** 1.52 * muB ** eps
 
-
-def liq_hayduk_minhas_organico(T, muB, VB, PA, PB):
-    """Hayduk-Minhas, solvente orgánico. PA,PB: paracoros. -> cm²/s"""
-    return 1.55e-8 * T ** 1.29 * PB ** 0.5 / (PA ** 0.42 * muB ** 0.92 * VB ** 0.23)
-
+def liq_hayduk_minhas_organico(VB, VA, T, muB, sigB):
+    """Hayduk-Minhas, solvente orgánico. B = solvente, A = soluto. -> cm²/s"""
+    return 1.55e-8 * VB * 0.217 * T * 1.29 * sigB * 0.125 / (muB * 0.92 * VA ** 0.45)
 
 def _alpha(xA, A_margules):
     return 1 - 2 * A_margules * xA * (1 - xA)       # 1 + dlnγA/dlnxA (Margules 1 parámetro)
@@ -269,7 +270,7 @@ def main():
     GC = [("M", "M [g/mol]"), ("sig", "σ [Å]"), ("eps", "ε/k [K]"), ("mu", "μp [D]"),
           ("Tb", "Tb [K]"), ("Vb", "Vb [cm³/mol]"), ("vf", "Σv FSG")]
     LC = [("M", "M [g/mol]"), ("Tb", "Tb [K]"), ("Vb", "V_b [cm³/mol]"), ("phi", "φ"),
-          ("mu", "μ [cP]"), ("par", "Paracoro")]
+          ("mu", "μ [cP]"), ("par", "Paracoro"), ("sigma","σ [dina/cm]")]
 
     tabs = st.tabs(["Cálculo", "Escalado T y P"])
 
@@ -346,9 +347,7 @@ def main():
                     b = editor(B, LIQ[B], LC, "l")
                     muB, w = mu_de(b, T)
                     avisos += [w] if w else []
-                    if a["par"] is None:
-                        a["par"] = st.number_input("Paracoro del soluto A", value=100.0)
-                    mostrar(liq_hayduk_minhas_organico(T, muB, b["Vb"], a["par"], b["par"]), avisos)
+                    mostrar(liq_hayduk_minhas_organico(b["Vb"], a["Vb"], T, muB, b["sigma"]), avisos)
 
             elif modelo.startswith("Vignes"):
                 A = st.selectbox("Componente A", solv, solv.index("Etanol"))
